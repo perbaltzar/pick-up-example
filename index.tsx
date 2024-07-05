@@ -63,10 +63,11 @@ const Goal: HDKComponent<{ outputSignal: number; keySignals: number[] }> = ({
           collisionSensor: {},
         }}
       />
+      {/* This extra AndGate make sure we have collected all keys */}
       <AndGate inputs={keySignals} output={collectedAllKeys} />
-
+      {/* We don't use a capacitor on the goal signal since you could take the goal first then */}
       <AndGate
-        inputs={[collectedAllKeys, inGoalSignal]}
+        inputs={[collectedAllKeys, inGoalSignal]} // If all keys are collected and the player is in the goal
         output={finishedGame}
       />
       <CapacitorSensor
